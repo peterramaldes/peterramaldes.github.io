@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.slate.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <style>
     @font-face {
@@ -68,8 +69,10 @@
         gap: 0.5rem;
     }
 
+    h2 i,
     h2 svg {
-        flex-shrink: 0;
+        width: 1.5rem;
+        height: 1.5rem;
     }
 
     .location-card {
@@ -88,7 +91,15 @@
     }
 
     .location-card a {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .location-card a i,
+    .location-card a svg {
+        width: 1em;
+        height: 1em;
     }
 
     .pix-section {
@@ -127,7 +138,7 @@
     <main>
         <section>
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 2v22"/><path d="M4 8h16"/></svg>
+                <i data-lucide="church"></i>
                 Local da Cerimônia
             </h2>
             <article class="location-card">
@@ -137,7 +148,7 @@
                 </address>
                 <p><strong>10h</strong></p>
                 <a href="https://maps.app.goo.gl/4Hm8yUSFi17TBLcN7" target="_blank" class="secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="8" r="2"/></svg>
+                    <i data-lucide="map-pin"></i>
                     Ver no Mapa
                 </a>
             </article>
@@ -145,7 +156,7 @@
 
         <section>
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><ellipse cx="12" cy="8" rx="5" ry="6"/><path d="M12 14v2"/><path d="M10 20h4"/><path d="M12 16v4"/></svg>
+                <i data-lucide="sparkles"></i>
                 Festa de Casamento
             </h2>
             <article class="location-card">
@@ -156,7 +167,7 @@
                 <p><strong>12h</strong></p>
                 <p><small>Aproximadamente 15km da Igreja</small></p>
                 <a href="https://maps.app.goo.gl/ZazHXCSHrnwXNSwt9" target="_blank" class="secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="8" r="2"/></svg>
+                    <i data-lucide="map-pin"></i>
                     Ver no Mapa
                 </a>
             </article>
@@ -164,13 +175,13 @@
 
         <section>
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                <i data-lucide="route"></i>
                 Google Maps Rota
             </h2>
             <article class="location-card" style="text-align: center;">
-                <p style="margin-bottom: 1rem;">Traçando a rota: Igreja → Rancho Beliskão</p>
+                <p style="margin-bottom: 1rem;">Traçando a rota: Seu Local → Igreja → Rancho Beliskão</p>
                 <a href="https://www.google.com/maps/dir/?api=1&destination=R.+Jos%C3%A9+C%C3%A9lso+Cl%C3%A1udio+134+Vit%C3%B3ria+ES&waypoints=Pra%C3%A7a+Assis+Chateaubriand+181+Vila+Velha+ES" target="_blank" class="secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    <i data-lucide="navigation"></i>
                     Traçar Rota
                 </a>
             </article>
@@ -178,7 +189,7 @@
 
         <section>
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M12 8V3"/><path d="M8 8h8"/><path d="M3 14h18"/></svg>
+                <i data-lucide="gift"></i>
                 Presentes
             </h2>
             <article class="pix-section">
@@ -191,7 +202,7 @@
 
         <section>
             <h2>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <i data-lucide="check-circle"></i>
                 Confirmar Presença
             </h2>
             <article class="rsvp-section">
@@ -205,6 +216,10 @@
     <footer>
         <p>Com amor, Peter & Pâmela</p>
     </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
