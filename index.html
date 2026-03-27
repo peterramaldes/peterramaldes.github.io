@@ -264,20 +264,22 @@
     }
 
     .pix-section::before {
-        content: '🦋';
+        content: '✿';
         position: absolute;
-        top: 1rem;
-        left: 1.5rem;
-        font-size: 1.5rem;
+        top: 0.5rem;
+        left: 1rem;
+        font-size: 1.2rem;
+        color: var(--color-rose);
         opacity: 0.5;
     }
 
     .pix-section::after {
-        content: '🦋';
+        content: '✿';
         position: absolute;
-        top: 1rem;
-        right: 1.5rem;
-        font-size: 1.5rem;
+        top: 0.5rem;
+        right: 1rem;
+        font-size: 1.2rem;
+        color: var(--color-rose);
         opacity: 0.5;
     }
 
@@ -318,27 +320,12 @@
         text-align: center;
         padding: 3rem 2rem;
         color: #8B7355;
-        position: relative;
-    }
-
-    footer::before {
-        content: '💍';
-        display: block;
-        font-size: 2rem;
-        margin-bottom: 1rem;
     }
 
     footer p {
         font-family: 'Great Vibes', cursive;
         font-size: 2rem;
         margin: 0;
-    }
-
-    footer .signature {
-        font-family: 'Karrik-Regular', serif;
-        font-size: 1rem;
-        margin-top: 0.5rem;
-        color: #8B7355;
     }
 
     @media (max-width: 600px) {
@@ -391,7 +378,7 @@
         <section>
             <h2>
                 <i data-lucide="sparkles"></i>
-                A Recepção
+                Recepção
             </h2>
             <article class="location-card">
                 <h3>Rancho Beliskão</h3>
@@ -455,8 +442,8 @@
     </main>
 
     <footer>
-        <p>Com Amor</p>
-        <p class="signature">Peter & Pâmela</p>
+        <p><i data-lucide="heart" style="width: 1.5rem; height: 1.5rem; vertical-align: middle; color: #e8b4b8;"></i></p>
+        <p>Com Amor, Peter & Pâmela</p>
     </footer>
 
     <script>
