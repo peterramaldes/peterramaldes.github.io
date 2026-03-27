@@ -330,13 +330,23 @@
     footer {
         text-align: center;
         padding: 3rem 2rem;
-        color: #6a7a9a;
+        color: #5a6a8a !important;
     }
 
     footer p {
         font-family: 'Great Vibes', cursive;
-        font-size: 2rem;
+        font-size: 2.5rem;
         margin: 0;
+        color: #5a6a8a !important;
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.9),
+            0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 30px rgba(255, 255, 255, 0.7),
+            1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p .names {
+        white-space: nowrap;
     }
 
     @media (max-width: 600px) {
@@ -453,8 +463,8 @@
     </main>
 
     <footer>
-        <p><i data-lucide="heart" style="width: 1.5rem; height: 1.5rem; vertical-align: middle; color: #8fa4c9;"></i></p>
-        <p>Com Amor, Peter & Pâmela</p>
+        <p><i data-lucide="heart" style="width: 1.5rem; height: 1.5rem; vertical-align: middle; color: #5a6a8a; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.9));"></i></p>
+        <p>Com Amor, <span class="names">Peter & Pâmela</span></p>
     </footer>
 
     <script>
