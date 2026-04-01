@@ -304,6 +304,69 @@
         border: 2px dashed #8fa4c9;
     }
 
+    .gift-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .gift-item {
+        background: linear-gradient(135deg, rgba(220, 225, 240, 0.4), rgba(200, 210, 230, 0.3));
+        padding: 1.2rem 1rem;
+        border-radius: 15px;
+        text-align: center;
+        border: 2px solid rgba(143, 164, 201, 0.3);
+        transition: transform 0.2s, border-color 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gift-item:hover {
+        transform: translateY(-3px);
+        border-color: rgba(143, 164, 201, 0.6);
+    }
+
+    .gift-item i {
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 0.5rem;
+        color: #5a6a8a;
+    }
+
+    .gift-item h4 {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+        color: #3d4a6b;
+    }
+
+    .gift-item p {
+        font-size: 0.7rem;
+        color: #5a6a8a;
+        margin: 0.3rem 0;
+        min-height: 2rem;
+    }
+
+    .gift-item .price {
+        display: block;
+        font-weight: bold;
+        color: #3d4a6b;
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+    }
+
+    .gift-item a {
+        display: inline-block;
+        background: linear-gradient(135deg, #7a8fb8, #5a6a8a);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.8rem;
+        margin-top: auto;
+    }
+
     .rsvp-section {
         text-align: center;
         padding: 2.5rem 2rem;
@@ -440,9 +503,29 @@
             </h2>
             <article class="pix-section">
                 <p>Sua presença é o melhor presente! Mas se quiserem nos surpreender, ficamos felizes com qualquer contribuição.</p>
-                <p><strong>Chave PIX:</strong></p>
-                <div class="pix-key">[Sua chave PIX]</div>
-                <p><small>Copie a chave acima e faça o transferência via PIX.</small></p>
+                <div class="gift-grid">
+                    <div class="gift-item">
+                        <i data-lucide="beer"></i>
+                        <h4>Caixa de Cerveja</h4>
+                        <p>Para molhar a garganta enquanto assiste o beijo</p>
+                        <span class="price">R$ 50</span>
+                        <a href="https://pagamento.rede/.peter" target="_blank">Dar de presente</a>
+                    </div>
+                    <div class="gift-item">
+                        <i data-lucide="wheat"></i>
+                        <h4>Pacote de Arroz</h4>
+                        <p>Para jogarem na gente (ou aproveitar no almoço)</p>
+                        <span class="price">R$ 25</span>
+                        <a href="https://pagamento.rede/.peter" target="_blank">Dar de presente</a>
+                    </div>
+                    <div class="gift-item">
+                        <i data-lucide="wine"></i>
+                        <h4>Garrafa de Champagne</h4>
+                        <p>Para o brinde final</p>
+                        <span class="price">R$ 80</span>
+                        <a href="https://pagamento.rede/.peter" target="_blank">Dar de presente</a>
+                    </div>
+                </div>
             </article>
         </section>
 
