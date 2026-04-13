@@ -320,11 +320,12 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
+        align-items: start;
     }
 
     .gift-item {
         background: linear-gradient(135deg, rgba(220, 225, 240, 0.4), rgba(200, 210, 230, 0.3));
-        padding: 1.2rem 1rem;
+        padding: 1rem;
         border-radius: 15px;
         text-align: center;
         border: 2px solid rgba(143, 164, 201, 0.3);
@@ -332,7 +333,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 280px;
+        justify-content: space-between;
+        height: 520px;
     }
 
     .gift-item:hover {
@@ -342,14 +344,23 @@
 
     .gift-image-container {
         width: 100%;
-        aspect-ratio: 1;
+        height: 280px;
         border-radius: 12px;
         overflow: hidden;
-        margin-bottom: 0.75rem;
         background: rgba(200, 210, 230, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .gift-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
 
     .gift-image {
@@ -365,24 +376,23 @@
     }
 
     .gift-item h4 {
-        margin: 0.3rem 0;
+        margin: 0.2rem 0;
         font-size: 0.9rem;
         color: #3d4a6b;
+        line-height: 1.2;
     }
 
     .gift-item p {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
         color: #5a6a8a;
-        margin: 0.3rem 0;
-        flex-grow: 1;
+        margin: 0.1rem 0;
+        line-height: 1.2;
     }
 
     .gift-item .price {
-        display: block;
         font-weight: bold;
         color: #3d4a6b;
-        margin: 0.5rem 0;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .gift-item button {
@@ -394,6 +404,69 @@
         font-size: 0.85rem;
         cursor: pointer;
         transition: all 0.2s;
+    }
+
+    .gift-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: auto;
+        align-items: center;
+    }
+
+    .gift-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .gift-image-placeholder {
+        color: #8fa4c9;
+        font-size: 3rem;
+        opacity: 0.5;
+    }
+
+    .gift-item h4 {
+        margin: 0.2rem 0;
+        font-size: 0.9rem;
+        color: #3d4a6b;
+        line-height: 1.2;
+        max-height: 2.4em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .gift-item p {
+        font-size: 0.65rem;
+        color: #5a6a8a;
+        margin: 0.1rem 0;
+        line-height: 1.2;
+    }
+
+    .gift-item .price {
+        font-weight: bold;
+        color: #3d4a6b;
+        font-size: 1rem;
+    }
+
+    .gift-item button {
+        background: linear-gradient(135deg, #7a8fb8, #5a6a8a);
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .gift-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
         margin-top: auto;
     }
 
@@ -654,6 +727,14 @@
             grid-template-columns: repeat(2, 1fr);
         }
 
+        .gift-item {
+            height: 520px;
+        }
+
+        .gift-image-container {
+            height: 280px;
+        }
+
         .modal-content {
             padding: 1.5rem;
             margin: 1rem;
@@ -663,6 +744,14 @@
     @media (max-width: 480px) {
         .gift-carousel {
             grid-template-columns: 1fr;
+        }
+
+        .gift-item {
+            height: 520px;
+        }
+
+        .gift-image-container {
+            height: 280px;
         }
     }
 
@@ -843,16 +932,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         let gifts = [
-            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/04-livre.png", "price": 0, "freeValue": true },
-            { "name": "Caixa de Cerveja", "description": "Para molhar a garganta enquanto assiste o beijo", "image": "assets/imgs/01-beer.png", "price": 50 },
-            { "name": "Pacote de Arroz", "description": "Para jogarem na gente (ou aproveitar no almoço)", "image": "assets/imgs/02-arroz.png", "price": 25 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Kit Primeiras Noites", "description": "Para sobreviver às noites sem dormir (com muito café)", "image": "assets/imgs/01-kit-noites.png", "price": 129.90 },
+            { "name": "Quadriciclo na Roça", "description": "Para a noiva passear de quadriciclo no fim de semana", "image": "assets/imgs/02-quadriciclo.png", "price": 1800.00 },
+            { "name": "Café para Pais Exaustos", "description": "Combustível oficial dos novos pais", "image": "assets/imgs/03-cafe.png", "price": 39.90 },
+            { "name": "Passagem Roma + Vaticano", "description": "Para o noivo conhecer A Escola de Atenas de Rafael nas Galerias Vaticanas", "image": "assets/imgs/04-roma.png", "price": 2500.00 },
+            { "name": "Universidade do Bebê", "description": "Contribua para a educação do nosso pequeno(a)", "image": "assets/imgs/05-universidade.png", "price": 350.00 },
+            { "name": "Curso: Mãe Imperfeita", "description": "Ou Como guilt-trip menos e curtir mais", "image": "assets/imgs/06-mae-imperfeita.png", "price": 59.90 },
+            { "name": "Fraldas", "description": "Não precisa explicar, né? É o que não pode faltar!", "image": "assets/imgs/07-fraldas.png", "price": 89.90 },
+            { "name": "1 Milheiro de Tijolos", "description": "Para construir nossa casinha na roça", "image": "assets/imgs/08-tijolos.png", "price": 1000.00 },
+            { "name": "Chá de Camomila", "description": "Para relaxar (enquanto o marido cuida do bebê)", "image": "assets/imgs/09-cha.png", "price": 24.90 },
+            { "name": "Pizza de Sexta-feira", "description": "Porque cozinhar? Pizza always wins!", "image": "assets/imgs/10-pizza.png", "price": 65.90 },
+            { "name": "Spa Day", "description": "Porque mãe também merece se cuidar", "image": "assets/imgs/11-spa.png", "price": 250.00 },
+            { "name": "Kit Sobreviver aos 3am", "description": "Chocolate + Café + Muita paciência", "image": "assets/imgs/12-kit-3am.png", "price": 99.90 },
+            { "name": "Geladeira Cheia", "description": "Para não sobreviver só de miojo no pós-parto", "image": "assets/imgs/13-geladeira.png", "price": 199.90 },
+            { "name": "Livro: Filosofia para Madrugadas", "description": "Para ler enquanto o bebê não dorme", "image": "assets/imgs/14-livro.png", "price": 69.90 },
+            { "name": "Noite de Sono", "description": "Vale 1 noite de descanso (com babá incluída)", "image": "assets/imgs/15-noite-sono.png", "price": 180.00 },
+            { "name": "Cerca para o Cavalo", "description": "Para guardar o cavalo do bebê em segurança", "image": "assets/imgs/16-lajotas.png", "price": 450.00 },
+            { "name": "Curso: Pai de Primeira Viagem", "description": "Aprenda a trocar fralda em tempo recorde", "image": "assets/imgs/17-pai-viagem.png", "price": 49.90 },
+            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/18-livre.png", "price": 0, "freeValue": true }
         ];
         let pixConfig = { "chave": "fa42eb66-cdd2-4b93-813e-5b82335ffc79", "nome": "Peter Admilson Ramaldes", "cidade": "SAO PAULO" };
         let currentPage = 1;
@@ -886,7 +983,7 @@
                 const item = document.createElement('div');
                 item.className = 'gift-item';
                 
-                const priceText = gift.freeValue ? 'Valor livre' : `R$ ${gift.price}`;
+                const priceText = gift.freeValue ? 'Valor livre' : `R$ ${gift.price.toFixed(2).replace('.', ',')}`;
                 
                 let imageHtml = '';
                 if (gift.image) {
@@ -906,10 +1003,14 @@
 
                 item.innerHTML = `
                     ${imageHtml}
-                    <h4>${gift.name}</h4>
-                    <p>${gift.description}</p>
-                    <span class="price">${priceText}</span>
-                    <button onclick="openPixModal(${start + index})">Dar presente</button>
+                    <div class="gift-content">
+                        <h4>${gift.name}</h4>
+                        <p>${gift.description}</p>
+                    </div>
+                    <div class="gift-footer">
+                        <span class="price">${priceText}</span>
+                        <button onclick="openPixModal(${start + index})">Dar presente</button>
+                    </div>
                 `;
                 carousel.appendChild(item);
             });
