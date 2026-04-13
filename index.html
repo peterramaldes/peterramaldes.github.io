@@ -313,29 +313,16 @@
 
     .gift-carousel-container {
         margin-top: 1.5rem;
-        position: relative;
         width: 100%;
-        overflow: hidden;
     }
 
     .gift-carousel {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        padding: 0.5rem;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    .gift-carousel::-webkit-scrollbar {
-        display: none;
     }
 
     .gift-item {
-        flex: 0 0 calc(33.333% - 0.667rem);
-        scroll-snap-align: start;
         background: linear-gradient(135deg, rgba(220, 225, 240, 0.4), rgba(200, 210, 230, 0.3));
         padding: 1.2rem 1rem;
         border-radius: 15px;
@@ -345,7 +332,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 320px;
+        min-height: 280px;
     }
 
     .gift-item:hover {
@@ -413,6 +400,46 @@
     .gift-item button:hover {
         transform: scale(1.05);
         box-shadow: 0 4px 15px rgba(90, 106, 138, 0.4);
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding: 1rem;
+    }
+
+    .page-btn {
+        background: linear-gradient(135deg, #8fa4c9, #b0c4de);
+        border: none;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .page-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+    }
+
+    .page-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .page-info {
+        color: #5a6a8a;
+        font-weight: 600;
+        min-width: 60px;
+        text-align: center;
     }
 
     .carousel-nav {
@@ -623,9 +650,8 @@
     }
 
     @media (max-width: 768px) {
-        .gift-item {
-            flex: 0 0 calc(80% - 0.5rem);
-            min-height: 350px;
+        .gift-carousel {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .modal-content {
@@ -635,13 +661,8 @@
     }
 
     @media (max-width: 480px) {
-        .gift-item {
-            flex: 0 0 calc(85% - 0.5rem);
-        }
-
-        .carousel-btn {
-            width: 36px;
-            height: 36px;
+        .gift-carousel {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -766,14 +787,10 @@
                 <p>Sua presença é o melhor presente! Mas se quiserem nos surpreender, ficamos felizes com qualquer contribuição.</p>
                 <div class="gift-carousel-container">
                     <div class="gift-carousel" id="giftCarousel"></div>
-                    <div class="carousel-nav">
-                        <button class="carousel-btn prev" onclick="moveCarousel(-1)" aria-label="Anterior">
-                            <i data-lucide="chevron-left"></i>
-                        </button>
-                        <div class="carousel-dots" id="carouselDots"></div>
-                        <button class="carousel-btn next" onclick="moveCarousel(1)" aria-label="Próximo">
-                            <i data-lucide="chevron-right"></i>
-                        </button>
+                    <div class="pagination" id="pagination">
+                        <button class="page-btn" id="prevPage" onclick="changePage(-1)">◀</button>
+                        <span class="page-info" id="pageInfo">1 / 1</span>
+                        <button class="page-btn" id="nextPage" onclick="changePage(1)">▶</button>
                     </div>
                 </div>
             </article>
@@ -826,25 +843,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         let gifts = [
+            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/04-livre.png", "price": 0, "freeValue": true },
             { "name": "Caixa de Cerveja", "description": "Para molhar a garganta enquanto assiste o beijo", "image": "assets/imgs/01-beer.png", "price": 50 },
             { "name": "Pacote de Arroz", "description": "Para jogarem na gente (ou aproveitar no almoço)", "image": "assets/imgs/02-arroz.png", "price": 25 },
             { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
-            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/04-livre.png", "price": 0, "freeValue": true }
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
+            { "name": "Garrafa de Champagne", "description": "Para o brinde final", "image": "assets/imgs/03-champagne.png", "price": 80 },
         ];
         let pixConfig = { "chave": "fa42eb66-cdd2-4b93-813e-5b82335ffc79", "nome": "Peter Admilson Ramaldes", "cidade": "SAO PAULO" };
-        let currentGiftIndex = 0;
+        let currentPage = 1;
+        let currentGift = null;
+        const itemsPerPage = 6;
 
         function loadData() {
             renderCarousel();
         }
 
+        function getItemsPerPage() {
+            if (window.innerWidth < 480) return 4;
+            if (window.innerWidth < 768) return 6;
+            return 6;
+        }
+
+        function getTotalPages() {
+            return Math.ceil(gifts.length / getItemsPerPage());
+        }
+
         function renderCarousel() {
             const carousel = document.getElementById('giftCarousel');
-            const dotsContainer = document.getElementById('carouselDots');
             carousel.innerHTML = '';
-            dotsContainer.innerHTML = '';
 
-            gifts.forEach((gift, index) => {
+            const perPage = getItemsPerPage();
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const pageGifts = gifts.slice(start, end);
+
+            pageGifts.forEach((gift, index) => {
                 const item = document.createElement('div');
                 item.className = 'gift-item';
                 
@@ -871,51 +909,37 @@
                     <h4>${gift.name}</h4>
                     <p>${gift.description}</p>
                     <span class="price">${priceText}</span>
-                    <button onclick="openPixModal(${index})">Dar presente</button>
+                    <button onclick="openPixModal(${start + index})">Dar presente</button>
                 `;
                 carousel.appendChild(item);
-
-                const dot = document.createElement('div');
-                dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-                dot.onclick = () => scrollToIndex(index);
-                dotsContainer.appendChild(dot);
             });
 
-            carousel.addEventListener('scroll', updateDots);
-            lucide.createIcons();
+            updatePagination();
         }
 
-        function scrollToIndex(index) {
-            const carousel = document.getElementById('giftCarousel');
-            const items = carousel.querySelectorAll('.gift-item');
-            if (items[index]) {
-                items[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        function updatePagination() {
+            const totalPages = getTotalPages();
+            const pageInfo = document.getElementById('pageInfo');
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            const pagination = document.getElementById('pagination');
+
+            if (totalPages <= 1) {
+                pagination.style.display = 'none';
+                return;
             }
+
+            pagination.style.display = 'flex';
+            pageInfo.textContent = `${currentPage} / ${totalPages}`;
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
         }
 
-        function updateDots() {
-            const carousel = document.getElementById('giftCarousel');
-            const items = carousel.querySelectorAll('.gift-item');
-            const dots = document.querySelectorAll('.carousel-dot');
-            const scrollLeft = carousel.scrollLeft;
-            const itemWidth = items[0]?.offsetWidth + 16 || 0;
-            const index = Math.round(scrollLeft / itemWidth);
-
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
-
-        function moveCarousel(direction) {
-            const carousel = document.getElementById('giftCarousel');
-            const items = carousel.querySelectorAll('.gift-item');
-            const itemWidth = items[0]?.offsetWidth + 16 || 0;
-            const visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
-            const maxIndex = Math.max(0, items.length - visibleItems);
-            
-            currentGiftIndex = Math.max(0, Math.min(maxIndex, currentGiftIndex + direction));
-            items[currentGiftIndex]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            updateDots();
+        function changePage(direction) {
+            const totalPages = getTotalPages();
+            currentPage += direction;
+            currentPage = Math.max(1, Math.min(totalPages, currentPage));
+            renderCarousel();
         }
 
         function crc16(str) {
@@ -958,6 +982,7 @@
 
         function openPixModal(index) {
             const gift = gifts[index];
+            currentGift = gift;
             document.getElementById('modalGiftName').textContent = gift.name;
             document.getElementById('modalGiftDesc').textContent = gift.description;
             document.getElementById('pixKey').textContent = pixConfig.chave;
@@ -983,7 +1008,9 @@
         }
 
         async function copyPixCode() {
-            const pixCode = generatePixEMV();
+            if (!currentGift) return;
+            
+            const pixCode = generatePixEMV(currentGift);
             const btn = document.querySelector('.copy-btn');
             const copyText = document.getElementById('copyText');
 
