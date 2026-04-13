@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Caixa de Cerveja",
+    "description": "Para molhar a garganta enquanto assiste o beijo",
+    "image": "assets/imgs/01-beer.png",
+    "price": 50
+  },
+  {
+    "name": "Pacote de Arroz",
+    "description": "Para jogarem na gente (ou aproveitar no almoço)",
+    "image": "assets/imgs/02-arroz.png",
+    "price": 25
+  },
+  {
+    "name": "Garrafa de Champagne",
+    "description": "Para o brinde final",
+    "image": "assets/imgs/03-champagne.png",
+    "price": 80
+  },
+  {
+    "name": "O que seu coração mandar",
+    "description": "Valor livre para contribuir com nossa jornada",
+    "image": "assets/imgs/04-livre.png",
+    "price": 0,
+    "freeValue": true
+  }
+]
