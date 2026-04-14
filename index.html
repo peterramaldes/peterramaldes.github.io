@@ -316,11 +316,19 @@
         width: 100%;
     }
 
-    .gift-carousel {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
+    .gift-carousel-wrapper {
+        display: flex;
+        align-items: center;
         gap: 1rem;
-        align-items: start;
+        position: relative;
+    }
+
+    .gift-carousel {
+        display: flex;
+        gap: 1rem;
+        flex: 1;
+        overflow: hidden;
+        justify-content: center;
     }
 
     .gift-item {
@@ -329,12 +337,14 @@
         border-radius: 15px;
         text-align: center;
         border: 2px solid rgba(143, 164, 201, 0.3);
-        transition: transform 0.2s, border-color 0.2s;
+        transition: transform 0.3s ease, opacity 0.3s ease;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
         height: 520px;
+        width: calc((100% - 2rem) / 3);
+        flex-shrink: 0;
     }
 
     .gift-item:hover {
@@ -499,20 +509,51 @@
         font-size: 1.2rem;
     }
 
-    .page-btn:hover:not(:disabled) {
+    .carousel-arrow {
+        background: linear-gradient(135deg, #8fa4c9, #b0c4de);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: white;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        z-index: 10;
+    }
+
+    .carousel-arrow:hover {
         transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(90, 106, 138, 0.4);
     }
 
-    .page-btn:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
     }
 
-    .page-info {
-        color: #5a6a8a;
-        font-weight: 600;
-        min-width: 60px;
-        text-align: center;
+    .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(143, 164, 201, 0.3);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .carousel-dot:hover {
+        background: rgba(143, 164, 201, 0.6);
+    }
+
+    .carousel-dot.active {
+        background: #8fa4c9;
+        transform: scale(1.2);
     }
 
     .carousel-nav {
@@ -723,16 +764,13 @@
     }
 
     @media (max-width: 768px) {
-        .gift-carousel {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
         .gift-item {
-            height: 520px;
+            width: calc((100% - 1rem) / 2);
+            height: 480px;
         }
 
         .gift-image-container {
-            height: 280px;
+            height: 220px;
         }
 
         .modal-content {
@@ -742,16 +780,19 @@
     }
 
     @media (max-width: 480px) {
-        .gift-carousel {
-            grid-template-columns: 1fr;
+        .carousel-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
         }
 
         .gift-item {
-            height: 520px;
+            width: 100%;
+            height: 480px;
         }
 
         .gift-image-container {
-            height: 280px;
+            height: 240px;
         }
     }
 
@@ -874,14 +915,12 @@
             </h2>
             <article class="pix-section">
                 <p>Sua presença é o melhor presente! Mas se quiserem nos surpreender, ficamos felizes com qualquer contribuição.</p>
-                <div class="gift-carousel-container">
+                <div class="gift-carousel-wrapper">
+                    <button class="carousel-arrow prev" id="prevBtn" onclick="moveCarousel(-1)">◀</button>
                     <div class="gift-carousel" id="giftCarousel"></div>
-                    <div class="pagination" id="pagination">
-                        <button class="page-btn" id="prevPage" onclick="changePage(-1)">◀</button>
-                        <span class="page-info" id="pageInfo">1 / 1</span>
-                        <button class="page-btn" id="nextPage" onclick="changePage(1)">▶</button>
-                    </div>
+                    <button class="carousel-arrow next" id="nextBtn" onclick="moveCarousel(1)">▶</button>
                 </div>
+                <div class="carousel-dots" id="carouselDots"></div>
             </article>
         </section>
 
@@ -932,54 +971,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         let gifts = [
-            { "name": "Kit Primeiras Noites", "description": "Para sobreviver às noites sem dormir (com muito café)", "image": "assets/imgs/01-kit-noites.png", "price": 129.90 },
-            { "name": "Quadriciclo na Roça", "description": "Para a noiva passear de quadriciclo no fim de semana", "image": "assets/imgs/02-quadriciclo.png", "price": 1800.00 },
-            { "name": "Café para Pais Exaustos", "description": "Combustível oficial dos novos pais", "image": "assets/imgs/03-cafe.png", "price": 39.90 },
-            { "name": "Passagem Roma + Vaticano", "description": "Para o noivo conhecer A Escola de Atenas de Rafael nas Galerias Vaticanas", "image": "assets/imgs/04-roma.png", "price": 2500.00 },
-            { "name": "Universidade do Bebê", "description": "Contribua para a educação do nosso pequeno(a)", "image": "assets/imgs/05-universidade.png", "price": 350.00 },
-            { "name": "Curso: Mãe Imperfeita", "description": "Ou Como guilt-trip menos e curtir mais", "image": "assets/imgs/06-mae-imperfeita.png", "price": 59.90 },
-            { "name": "Fraldas", "description": "Não precisa explicar, né? É o que não pode faltar!", "image": "assets/imgs/07-fraldas.png", "price": 89.90 },
-            { "name": "1 Milheiro de Tijolos", "description": "Para construir nossa casinha na roça", "image": "assets/imgs/08-tijolos.png", "price": 1000.00 },
-            { "name": "Chá de Camomila", "description": "Para relaxar (enquanto o marido cuida do bebê)", "image": "assets/imgs/09-cha.png", "price": 24.90 },
-            { "name": "Pizza de Sexta-feira", "description": "Porque cozinhar? Pizza always wins!", "image": "assets/imgs/10-pizza.png", "price": 65.90 },
-            { "name": "Spa Day", "description": "Porque mãe também merece se cuidar", "image": "assets/imgs/11-spa.png", "price": 250.00 },
-            { "name": "Kit Sobreviver aos 3am", "description": "Chocolate + Café + Muita paciência", "image": "assets/imgs/12-kit-3am.png", "price": 99.90 },
-            { "name": "Geladeira Cheia", "description": "Para não sobreviver só de miojo no pós-parto", "image": "assets/imgs/13-geladeira.png", "price": 199.90 },
-            { "name": "Livro: Filosofia para Madrugadas", "description": "Para ler enquanto o bebê não dorme", "image": "assets/imgs/14-livro.png", "price": 69.90 },
-            { "name": "Noite de Sono", "description": "Vale 1 noite de descanso (com babá incluída)", "image": "assets/imgs/15-noite-sono.png", "price": 180.00 },
-            { "name": "Cerca para o Cavalo", "description": "Para guardar o cavalo do bebê em segurança", "image": "assets/imgs/16-lajotas.png", "price": 450.00 },
-            { "name": "Curso: Pai de Primeira Viagem", "description": "Aprenda a trocar fralda em tempo recorde", "image": "assets/imgs/17-pai-viagem.png", "price": 49.90 },
+            { "name": "Fraldas", "description": "Não precisa explicar, né? É o que não pode faltar!", "image": "assets/imgs/07-fraldas.png", "price": 150.00 },
+            { "name": "Kit Primeiras Noites", "description": "Para sobreviver às noites sem dormir (com muito café)", "image": "assets/imgs/01-kit-noites.png", "price": 300.00 },
+            { "name": "Universidade do Bebê", "description": "Contribua para a educação do nosso pequeno(a)", "image": "assets/imgs/05-universidade.png", "price": 450.00 },
+            { "name": "Spa Day", "description": "Porque mãe também merece se cuidar", "image": "assets/imgs/11-spa.png", "price": 600.00 },
+            { "name": "Passagem Roma + Vaticano", "description": "Para o noivo conhecer A Escola de Atenas de Rafael nas Galerias Vaticanas", "image": "assets/imgs/04-roma.png", "price": 750.00 },
+            { "name": "1 Milheiro de Tijolos", "description": "Para construir nossa casinha na roça", "image": "assets/imgs/08-tijolos.png", "price": 900.00 },
+            { "name": "Quadriciclo na Roça", "description": "Para a noiva passear de quadriciclo no fim de semana", "image": "assets/imgs/02-quadriciclo.png", "price": 1050.00 },
             { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/18-livre.png", "price": 0, "freeValue": true }
         ];
         let pixConfig = { "chave": "fa42eb66-cdd2-4b93-813e-5b82335ffc79", "nome": "Peter Admilson Ramaldes", "cidade": "SAO PAULO" };
-        let currentPage = 1;
+        let currentIndex = 0;
         let currentGift = null;
-        const itemsPerPage = 6;
 
         function loadData() {
             renderCarousel();
+            updateCarousel();
         }
 
-        function getItemsPerPage() {
-            if (window.innerWidth < 480) return 4;
-            if (window.innerWidth < 768) return 6;
-            return 6;
+        function getVisibleItems() {
+            if (window.innerWidth < 480) return 1;
+            return 3;
         }
 
-        function getTotalPages() {
-            return Math.ceil(gifts.length / getItemsPerPage());
+        function getTotalSlides() {
+            return gifts.length - getVisibleItems() + 1;
         }
 
         function renderCarousel() {
             const carousel = document.getElementById('giftCarousel');
+            const dotsContainer = document.getElementById('carouselDots');
             carousel.innerHTML = '';
+            dotsContainer.innerHTML = '';
 
-            const perPage = getItemsPerPage();
-            const start = (currentPage - 1) * perPage;
-            const end = start + perPage;
-            const pageGifts = gifts.slice(start, end);
-
-            pageGifts.forEach((gift, index) => {
+            gifts.forEach((gift, index) => {
                 const item = document.createElement('div');
                 item.className = 'gift-item';
                 
@@ -1009,39 +1034,81 @@
                     </div>
                     <div class="gift-footer">
                         <span class="price">${priceText}</span>
-                        <button onclick="openPixModal(${start + index})">Presentear</button>
+                        <button onclick="openPixModal(${index})">Presentear</button>
                     </div>
                 `;
                 carousel.appendChild(item);
             });
 
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const totalPages = getTotalPages();
-            const pageInfo = document.getElementById('pageInfo');
-            const prevBtn = document.getElementById('prevPage');
-            const nextBtn = document.getElementById('nextPage');
-            const pagination = document.getElementById('pagination');
-
-            if (totalPages <= 1) {
-                pagination.style.display = 'none';
-                return;
+            const totalSlides = getTotalSlides();
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
             }
 
-            pagination.style.display = 'flex';
-            pageInfo.textContent = `${currentPage} / ${totalPages}`;
-            prevBtn.disabled = currentPage === 1;
-            nextBtn.disabled = currentPage === totalPages;
+            updateCarousel();
         }
 
-        function changePage(direction) {
-            const totalPages = getTotalPages();
-            currentPage += direction;
-            currentPage = Math.max(1, Math.min(totalPages, currentPage));
-            renderCarousel();
+        function updateCarousel() {
+            const carousel = document.getElementById('giftCarousel');
+            const items = carousel.querySelectorAll('.gift-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const visibleItems = getVisibleItems();
+            const totalSlides = getTotalSlides();
+
+            items.forEach((item, index) => {
+                item.style.display = (index >= currentIndex && index < currentIndex + visibleItems) ? 'flex' : 'none';
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+
+            prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+            prevBtn.style.cursor = currentIndex === 0 ? 'default' : 'pointer';
+            nextBtn.style.opacity = currentIndex >= totalSlides - 1 ? '0.3' : '1';
+            nextBtn.style.cursor = currentIndex >= totalSlides - 1 ? 'default' : 'pointer';
         }
+
+        function moveCarousel(direction) {
+            const totalSlides = getTotalSlides();
+            currentIndex += direction;
+            currentIndex = Math.max(0, Math.min(totalSlides - 1, currentIndex));
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            const visibleItems = getVisibleItems();
+            const maxIndex = gifts.length - visibleItems;
+            currentIndex = Math.min(index, maxIndex);
+            updateCarousel();
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('giftCarousel');
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        moveCarousel(1);
+                    } else {
+                        moveCarousel(-1);
+                    }
+                }
+            }, { passive: true });
+        });
 
         function crc16(str) {
             let crc = 0xFFFF;
