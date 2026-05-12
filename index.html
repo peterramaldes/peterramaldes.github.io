@@ -780,19 +780,62 @@
     }
 
     @media (max-width: 480px) {
+        .gift-carousel-wrapper {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
         .carousel-arrow {
-            width: 40px;
-            height: 40px;
-            font-size: 1rem;
+            display: none;
+        }
+
+        .gift-carousel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            width: 100%;
         }
 
         .gift-item {
             width: 100%;
-            height: 480px;
+            height: auto;
+            min-height: 200px;
         }
 
         .gift-image-container {
-            height: 240px;
+            height: 100px;
+        }
+
+        .gift-content {
+            padding: 0.25rem 0;
+        }
+
+        .gift-item h4 {
+            font-size: 0.75rem;
+            -webkit-line-clamp: 1;
+        }
+
+        .gift-item p {
+            display: none;
+        }
+
+        .gift-item .price {
+            font-size: 0.85rem;
+        }
+
+        .gift-item button {
+            padding: 0.35rem 0.7rem;
+            font-size: 0.7rem;
+        }
+
+        .gift-footer {
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .carousel-dots {
+            display: none;
         }
     }
 
@@ -1059,19 +1102,32 @@
             const nextBtn = document.getElementById('nextBtn');
             const visibleItems = getVisibleItems();
             const totalSlides = getTotalSlides();
+            const isMobile = window.innerWidth < 480;
 
-            items.forEach((item, index) => {
-                item.style.display = (index >= currentIndex && index < currentIndex + visibleItems) ? 'flex' : 'none';
-            });
+            if (isMobile) {
+                items.forEach((item) => {
+                    item.style.display = 'flex';
+                });
+                dots.forEach((dot) => dot.style.display = 'none');
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                items.forEach((item, index) => {
+                    item.style.display = (index >= currentIndex && index < currentIndex + visibleItems) ? 'flex' : 'none';
+                });
 
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                    dot.style.display = 'flex';
+                });
 
-            prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
-            prevBtn.style.cursor = currentIndex === 0 ? 'default' : 'pointer';
-            nextBtn.style.opacity = currentIndex >= totalSlides - 1 ? '0.3' : '1';
-            nextBtn.style.cursor = currentIndex >= totalSlides - 1 ? 'default' : 'pointer';
+                prevBtn.style.display = 'flex';
+                nextBtn.style.display = 'flex';
+                prevBtn.style.opacity = currentIndex === 0 ? '0.3' : '1';
+                prevBtn.style.cursor = currentIndex === 0 ? 'default' : 'pointer';
+                nextBtn.style.opacity = currentIndex >= totalSlides - 1 ? '0.3' : '1';
+                nextBtn.style.cursor = currentIndex >= totalSlides - 1 ? 'default' : 'pointer';
+            }
         }
 
         function moveCarousel(direction) {
@@ -1222,6 +1278,8 @@
             renderCarousel();
             lucide.createIcons();
         }
+
+        window.addEventListener('resize', updateCarousel);
     </script>
 </body>
 
