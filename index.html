@@ -1014,14 +1014,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         let gifts = [
-            { "name": "Fraldas", "description": "Não precisa explicar, né? É o que não pode faltar!", "image": "assets/imgs/07-fraldas.png", "price": 150.00 },
-            { "name": "Kit Primeiras Noites", "description": "Para sobreviver às noites sem dormir do nosso princepezinho (com muito café)", "image": "assets/imgs/01-kit-noites.png", "price": 300.00 },
-            { "name": "Universidade do Bebê", "description": "Contribua para a educação da nossa pequena princesa", "image": "assets/imgs/05-universidade.png", "price": 450.00 },
-            { "name": "Spa Day", "description": "Porque mãe também merece se cuidar", "image": "assets/imgs/11-spa.png", "price": 600.00 },
-            { "name": "Passagem Roma + Vaticano", "description": "Para o noivo conhecer A Escola de Atenas de Rafael nas Galerias Vaticanas", "image": "assets/imgs/04-roma.png", "price": 750.00 },
-            { "name": "1 Milheiro de Tijolos", "description": "Para construir nossa casinha na roça", "image": "assets/imgs/08-tijolos.png", "price": 900.00 },
-            { "name": "Quadriciclo na Roça", "description": "Para a noiva passear de quadriciclo no fim de semana", "image": "assets/imgs/02-quadriciclo.png", "price": 1050.00 },
-            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/18-livre.png", "price": 0, "freeValue": true }
+            { "name": "Fraldas", "description": "Não precisa explicar, né? É o que não pode faltar!", "image": "assets/imgs/07-fraldas.png", "price": 150.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406150.005802BR5923Peter Admilson Ramaldes6009SAO PAULO63048892" },
+            { "name": "Kit Primeiras Noites", "description": "Para sobreviver às noites sem dormir do nosso princepezinho (com muito café)", "image": "assets/imgs/01-kit-noites.png", "price": 300.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406300.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510ISPLE44all6304CA30" },
+            { "name": "Universidade do Bebê", "description": "Contribua para a educação da nossa pequena princesa", "image": "assets/imgs/05-universidade.png", "price": 450.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406450.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510YX9UM2oqqD63046B56" },
+            { "name": "Spa Day", "description": "Porque mãe também merece se cuidar", "image": "assets/imgs/11-spa.png", "price": 600.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406600.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510BxeucYh3rg6304583A" },
+            { "name": "Passagem Roma + Vaticano", "description": "Para o noivo conhecer A Escola de Atenas de Rafael nas Galerias Vaticanas", "image": "assets/imgs/04-roma.png", "price": 750.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406750.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510uDQessitKx63045B9C" },
+            { "name": "1 Milheiro de Tijolos", "description": "Para construir nossa casinha na roça", "image": "assets/imgs/08-tijolos.png", "price": 900.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865406900.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510TyjJXhwzWG63049D6A" },
+            { "name": "Quadriciclo na Roça", "description": "Para a noiva passear de quadriciclo no fim de semana", "image": "assets/imgs/02-quadriciclo.png", "price": 1050.00, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc7952040000530398654071050.005802BR5923Peter Admilson Ramaldes6009SAO PAULO62140510YfRuMdcul1630482E9" },
+            { "name": "O que seu coração mandar", "description": "Valor livre para contribuir com nossa jornada", "image": "assets/imgs/18-livre.png", "price": 0, "freeValue": true, "pixCode": "00020126580014BR.GOV.BCB.PIX0136fa42eb66-cdd2-4b93-813e-5b82335ffc795204000053039865802BR5923Peter Admilson Ramaldes6009SAO PAULO621405102BMOMRkhSW63047F93" }
         ];
         let pixConfig = { "chave": "fa42eb66-cdd2-4b93-813e-5b82335ffc79", "nome": "Peter Admilson Ramaldes", "cidade": "SAO PAULO" };
         let currentIndex = 0;
@@ -1204,6 +1204,10 @@
             return payload + crc16(payload);
         }
 
+        function getPixCode(gift) {
+            return gift.pixCode || generatePixEMV(gift);
+        }
+
         function openPixModal(index) {
             const gift = gifts[index];
             currentGift = gift;
@@ -1212,7 +1216,7 @@
             document.getElementById('pixKey').textContent = pixConfig.chave;
             document.getElementById('pixNome').textContent = 'Nome: ' + pixConfig.nome;
 
-            const pixCode = generatePixEMV(gift);
+            const pixCode = getPixCode(gift);
             document.getElementById('qrCanvas').innerHTML = "";
             new QRCode(document.getElementById('qrCanvas'), pixCode);
 
@@ -1234,7 +1238,7 @@
         async function copyPixCode() {
             if (!currentGift) return;
             
-            const pixCode = generatePixEMV(currentGift);
+            const pixCode = getPixCode(currentGift);
             const btn = document.querySelector('.copy-btn');
             const copyText = document.getElementById('copyText');
 
