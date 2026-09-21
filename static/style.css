@@ -182,8 +182,8 @@ main.wrap {
 }
 
 /* Post pages need extra room for the side table of contents; the header
-   and footer stay at the site-wide width so navigating in and out of a
-   post doesn't shift the page chrome. */
+   stays at the site-wide width so navigating in and out of a post
+   doesn't shift the page chrome. */
 body.post main.wrap {
   --max-width: 980px;
 }
@@ -410,17 +410,4 @@ nav.toc a:hover {
     grid-column: 1;
     grid-row: 3;
   }
-}
-
-/* Footer */
-footer.site {
-  flex-shrink: 0;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-}
-
-footer.site .wrap {
-  padding: 24px 20px 40px;
 }
