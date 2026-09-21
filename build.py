@@ -67,7 +67,7 @@ def build_post(md_path):
     date = meta.get("date", "")
     description = meta.get("description", "")
 
-    toc_block = f'<nav class="toc side"><p class="toc-title">Contents</p>{toc_html}</nav>' if toc_html else ""
+    toc_block = f'<nav class="toc side"><p class="toc-title">// contents</p>{toc_html}</nav>' if toc_html else ""
 
     page_content = f"""
 <div class="post-layout">
@@ -109,7 +109,11 @@ def build_index(posts):
 </li>
 """)
     list_html = '<ul class="post-list">' + "".join(items) + "</ul>" if items else "<p>No posts yet.</p>"
-    page_content = f"<h1>Peter A. Ramaldes</h1>\n{list_html}"
+    page_content = (
+        "<h1>Peter A. Ramaldes</h1>\n"
+        '<p class="lede">// notes on software and things I\'m building</p>\n'
+        f"{list_html}"
+    )
     html = render_page("Peter A. Ramaldes", "Notes on software and things I'm building.", page_content)
     write(OUT / "index.html", html)
 
