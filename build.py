@@ -29,13 +29,27 @@ def parse_front_matter(text):
     return meta, body
 
 
-def render_toc(tokens, depth=0):
+def render_toc(tokens, ancestor_has_next=()):
+    """Render a semantic nested list with `tree`-style connector prefixes.
+
+    CSS borders are tied to individual list boxes, so they cannot form an
+    unbroken connector across list-item spacing.  Each entry instead carries
+    the continuation columns for its ancestors, just as the `tree` command
+    does (``│   ├──`` / ``│   └──``).
+    """
     if not tokens:
         return ""
     items = []
-    for token in tokens:
-        children = render_toc(token["children"], depth + 1)
-        items.append(f'<li><a href="#{token["id"]}">{token["name"]}</a>{children}</li>')
+    for index, token in enumerate(tokens):
+        has_next = index < len(tokens) - 1
+        prefix = "".join("│   " if continues else "    " for continues in ancestor_has_next)
+        prefix += "├── " if has_next else "└── "
+        children = render_toc(token["children"], ancestor_has_next + (has_next,))
+        items.append(
+            f'<li><a href="#{token["id"]}">'
+            f'<span class="toc-branch" aria-hidden="true">{prefix}</span>'
+            f'<span>{token["name"]}</span></a>{children}</li>'
+        )
     return "<ul>" + "".join(items) + "</ul>"
 
 

@@ -182,7 +182,7 @@ main {
    bare `main { padding }` (0,0,1) regardless of source order, silently
    dropping this. Scoping to main.wrap (0,1,1) wins correctly. */
 main.wrap {
-  padding: 96px 20px;
+  padding: 6px 20px 96px;
 }
 
 h1, h2, h3, h4 {
@@ -313,38 +313,26 @@ nav.toc ul {
 }
 
 nav.toc li {
-  position: relative;
   margin: 0.3em 0;
-  padding-left: 1.4em;
 }
 
-nav.toc li::before {
-  content: "\251C\2500";
-  position: absolute;
-  left: 0;
-  color: var(--muted);
-}
-
-nav.toc li:last-child::before {
-  content: "\2514\2500";
-}
-
-/* Nested branches: cancel the parent's text indent so the guide line
-   lands under the parent's own connector, like `tree`'s "│" column.
-   Padding (not margin) keeps the border flush with no visual gap. */
+/* Keep the nested lists for document structure, but let the generated
+   `tree` prefixes own the visual indentation and connector columns. */
 nav.toc li > ul {
-  margin-left: -1.4em;
-  padding: 0.3em 0 0 1.4em;
-  border-left: 1px solid transparent;
-}
-
-nav.toc li:not(:last-child) > ul {
-  border-left-color: var(--border);
+  margin: 0;
+  padding: 0;
 }
 
 nav.toc a {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
   text-decoration: none;
   color: var(--fg);
+}
+
+nav.toc .toc-branch {
+  color: var(--muted);
+  white-space: pre;
 }
 
 nav.toc a:hover {
