@@ -49,7 +49,7 @@
   --border: #dee3e8;
   --accent: #1f6b4f;
   --code-bg: #eef1ee;
-  --max-width: 700px;
+  --max-width: 980px;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -179,13 +179,6 @@ main {
    dropping this. Scoping to main.wrap (0,1,1) wins correctly. */
 main.wrap {
   padding: 1% 20px 96px;
-}
-
-/* Post pages need extra room for the side table of contents. Apply the
-   wider max-width at the body level so the header lines up with the
-   post content instead of staying narrower and centered. */
-body.post {
-  --max-width: 980px;
 }
 
 h1, h2, h3, h4 {
