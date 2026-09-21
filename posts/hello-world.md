@@ -1,38 +1,36 @@
 ---
 title: Hello, World
 date: 2026-09-21
-description: A first post — lorem ipsum placeholder to be replaced later.
+description: I was laid off from Trustly. Here's what I'm doing with the time, and what this blog is for.
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is the first
-post on this blog, used to check that the layout, table of contents, and
-code formatting all look right. Replace this with real content whenever
-you're ready.
+Short version: I was part of a layoff at Trustly. Longer version — I'm
+fine, and I suddenly have time on my hands, so I'm starting this blog to
+write about what I'm thinking and building while I figure out what's next.
 
-## Background
+## What happened
 
-Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-ex ea commodo consequat.
+Trustly went through a round of layoffs, and my role was one of the ones
+cut. It wasn't personal, it wasn't performance-related, it's just the
+timing I landed in. I've had a few days to sit with it, and mostly what
+I feel is: okay, now what.
 
-### A subsection
+"Now what" turns out to include a lot of free time, a backlog of ideas
+I never got to, and no excuse left not to write them down.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident.
+## Why this blog
 
-## Code example
+I've wanted a place to think in public for a while — not a highlight
+reel, just notes on the things I'm actually working on: code, tools,
+half-formed opinions about software, maybe some of the job search along
+the way. This post is the introduction. The posts that follow are the
+actual content.
 
-Here's a fenced code block, rendered in JetBrains Mono:
+If you're reading this because you know me, hi. If you're reading this
+because you're hiring, also hi — my inbox is open.
 
-```python
-def greet(name: str) -> str:
-    return f"Hello, {name}!"
+## What's next
 
-print(greet("world"))
-```
-
-## Wrapping up
-
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum.
+I don't have a fixed schedule or topic list. I'm going to write about
+whatever I'm building or learning, and see where it goes. Thanks for
+reading.
