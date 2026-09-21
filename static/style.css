@@ -181,10 +181,10 @@ main.wrap {
   padding: 1% 20px 96px;
 }
 
-/* Post pages need extra room for the side table of contents; the header
-   stays at the site-wide width so navigating in and out of a post
-   doesn't shift the page chrome. */
-body.post main.wrap {
+/* Post pages need extra room for the side table of contents. Apply the
+   wider max-width at the body level so the header lines up with the
+   post content instead of staying narrower and centered. */
+body.post {
   --max-width: 980px;
 }
 
