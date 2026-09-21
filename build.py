@@ -92,7 +92,7 @@ def build_about():
     content_html = md.convert(body)
     title = meta.get("title", "About")
     description = meta.get("description", "")
-    page_content = f"<article>\n<h1>{title}</h1>\n{content_html}\n</article>\n"
+    page_content = f'<article>\n<h1 class="sr-only">{title}</h1>\n{content_html}\n</article>\n'
     html = render_page(title, description, page_content)
     write(OUT / "about" / "index.html", html)
 
@@ -110,7 +110,7 @@ def build_index(posts):
 """)
     list_html = '<ul class="post-list">' + "".join(items) + "</ul>" if items else "<p>No posts yet.</p>"
     page_content = (
-        "<h1>Peter A. Ramaldes</h1>\n"
+        '<h1 class="sr-only">Peter A. Ramaldes</h1>\n'
         '<p class="lede">// notes on software and things I\'m building</p>\n'
         f"{list_html}"
     )

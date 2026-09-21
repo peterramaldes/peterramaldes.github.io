@@ -101,6 +101,18 @@ a {
   outline-offset: 2px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .wrap {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -164,7 +176,7 @@ nav.site-nav a:hover {
 /* Main */
 main {
   flex: 1 0 auto;
-  padding: 72px 0 80px;
+  padding: 96px 0;
 }
 
 h1, h2, h3, h4 {
@@ -183,7 +195,7 @@ p { margin: 0 0 1.1em; }
   font-family: var(--mono);
   font-size: 0.92rem;
   color: var(--muted);
-  margin: -0.3em 0 2em;
+  margin: 0 0 2em;
 }
 
 .meta {
@@ -294,10 +306,6 @@ nav.toc ul {
   margin: 0;
 }
 
-nav.toc ul ul {
-  padding-left: 1.4em;
-}
-
 nav.toc li {
   position: relative;
   margin: 0.3em 0;
@@ -313,6 +321,18 @@ nav.toc li::before {
 
 nav.toc li:last-child::before {
   content: "\2514\2500";
+}
+
+/* Nested branches: cancel the parent's text indent so the guide line
+   lands under the parent's own connector, like `tree`'s "│" column. */
+nav.toc li > ul {
+  margin: 0.3em 0 0 -1.4em;
+  padding-left: 1.4em;
+  border-left: 1px solid transparent;
+}
+
+nav.toc li:not(:last-child) > ul {
+  border-left-color: var(--border);
 }
 
 nav.toc a {
