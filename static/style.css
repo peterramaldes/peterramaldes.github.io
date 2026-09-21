@@ -119,10 +119,6 @@ a {
   padding: 0 20px;
 }
 
-body.post {
-  --max-width: 980px;
-}
-
 /* Header */
 header.site {
   border-bottom: 1px solid var(--border);
@@ -183,6 +179,13 @@ main {
    dropping this. Scoping to main.wrap (0,1,1) wins correctly. */
 main.wrap {
   padding: 1% 20px 96px;
+}
+
+/* Post pages need extra room for the side table of contents; the header
+   and footer stay at the site-wide width so navigating in and out of a
+   post doesn't shift the page chrome. */
+body.post main.wrap {
+  --max-width: 980px;
 }
 
 h1, h2, h3, h4 {
