@@ -39,9 +39,13 @@ def render_toc(tokens, depth=0):
     return "<ul>" + "".join(items) + "</ul>"
 
 
-def render_page(title, description, content_html):
+def render_page(title, description, content_html, body_class=""):
     return TEMPLATE.format(
-        title=title, description=description, content=content_html, year=YEAR
+        title=title,
+        description=description,
+        content=content_html,
+        year=YEAR,
+        body_class=body_class,
     )
 
 
@@ -63,17 +67,19 @@ def build_post(md_path):
     date = meta.get("date", "")
     description = meta.get("description", "")
 
-    toc_block = f'<nav class="toc"><p class="toc-title">Contents</p>{toc_html}</nav>' if toc_html else ""
+    toc_block = f'<nav class="toc side"><p class="toc-title">Contents</p>{toc_html}</nav>' if toc_html else ""
 
     page_content = f"""
-<article>
-  <h1>{title}</h1>
-  <p class="meta">{date}</p>
+<div class="post-layout">
+  <article>
+    <h1>{title}</h1>
+    <p class="meta">{date}</p>
+    {content_html}
+  </article>
   {toc_block}
-  {content_html}
-</article>
+</div>
 """
-    html = render_page(title, description, page_content)
+    html = render_page(title, description, page_content, body_class="post")
     slug = md_path.stem
     write(OUT / "posts" / slug / "index.html", html)
     return {"title": title, "date": date, "description": description, "slug": slug}
