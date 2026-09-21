@@ -125,7 +125,7 @@ def build_index(posts):
     list_html = '<ul class="post-list">' + "".join(items) + "</ul>" if items else "<p>No posts yet.</p>"
     page_content = (
         '<h1 class="sr-only">Peter A. Ramaldes</h1>\n'
-        '<p class="lede">// notes on software and things I\'m building</p>\n'
+        '<p class="lede">// notes on software and thoughts</p>\n'
         f"{list_html}"
     )
     html = render_page("Peter A. Ramaldes", "Notes on software and things I'm building.", page_content)
