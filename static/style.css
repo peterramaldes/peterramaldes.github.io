@@ -176,7 +176,13 @@ nav.site-nav a:hover {
 /* Main */
 main {
   flex: 1 0 auto;
-  padding: 96px 0;
+}
+
+/* Specificity note: .wrap's own padding (0,1,0) would otherwise beat a
+   bare `main { padding }` (0,0,1) regardless of source order, silently
+   dropping this. Scoping to main.wrap (0,1,1) wins correctly. */
+main.wrap {
+  padding: 96px 20px;
 }
 
 h1, h2, h3, h4 {
@@ -324,10 +330,11 @@ nav.toc li:last-child::before {
 }
 
 /* Nested branches: cancel the parent's text indent so the guide line
-   lands under the parent's own connector, like `tree`'s "│" column. */
+   lands under the parent's own connector, like `tree`'s "│" column.
+   Padding (not margin) keeps the border flush with no visual gap. */
 nav.toc li > ul {
-  margin: 0.3em 0 0 -1.4em;
-  padding-left: 1.4em;
+  margin-left: -1.4em;
+  padding: 0.3em 0 0 1.4em;
   border-left: 1px solid transparent;
 }
 
