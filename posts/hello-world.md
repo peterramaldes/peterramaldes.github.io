@@ -4,6 +4,12 @@ date: 2026-09-21
 description: I was laid off from Trustly. Here's what I'm doing with the time, and what this blog is for.
 ---
 
+> Wind extinguishes a candle and energizes fire. Likewise with randomness,
+> uncertainty, chaos: you want to use them, not hide from them. You want
+> to be the fire and wish for the wind.
+>
+> — Nassim Nicholas Taleb, *Antifragile*
+
 Short version: I was part of a layoff at Trustly. Longer version — I'm
 fine, and I suddenly have time on my hands, so I'm starting this blog to
 write about what I'm thinking and building while I figure out what's next.
