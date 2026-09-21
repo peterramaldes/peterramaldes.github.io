@@ -109,8 +109,8 @@ def build_index(posts):
 </li>
 """)
     list_html = '<ul class="post-list">' + "".join(items) + "</ul>" if items else "<p>No posts yet.</p>"
-    page_content = f"<h1>Peter Ramaldes</h1>\n{list_html}"
-    html = render_page("Peter Ramaldes", "Notes on software and things I'm building.", page_content)
+    page_content = f"<h1>Peter A. Ramaldes</h1>\n{list_html}"
+    html = render_page("Peter A. Ramaldes", "Notes on software and things I'm building.", page_content)
     write(OUT / "index.html", html)
 
 

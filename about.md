@@ -1,6 +1,6 @@
 ---
 title: About
-description: About Peter Ramaldes.
+description: About Peter A. Ramaldes.
 ---
 
 Hi, I'm Peter. This is where I occasionally write things down.

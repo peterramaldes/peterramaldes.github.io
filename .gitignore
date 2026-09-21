@@ -10,3 +10,6 @@ gen
 # Python
 __pycache__/
 *.pyc
+
+# Local Claude Code config
+.claude/
