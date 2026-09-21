@@ -1,0 +1,273 @@
+/* Fonts (self-hosted, no third-party requests) */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/static/fonts/inter-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/static/fonts/inter-italic-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/static/fonts/inter-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/static/fonts/inter-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/static/fonts/jbmono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/static/fonts/jbmono-700.woff2") format("woff2");
+}
+
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #666666;
+  --border: #e5e5e5;
+  --accent: #205fd0;
+  --code-bg: #f5f5f7;
+  --max-width: 700px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --fg: #e8e8e8;
+    --muted: #9a9a9a;
+    --border: #2a2d33;
+    --accent: #6ea8ff;
+    --code-bg: #1d2026;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header.site {
+  border-bottom: 1px solid var(--border);
+}
+
+header.site .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+header.site a.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+nav.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.95rem;
+}
+
+nav.site-nav a:hover {
+  color: var(--accent);
+}
+
+main {
+  padding: 48px 0 80px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  scroll-margin-top: 20px;
+}
+
+h1 { font-size: 2rem; margin: 0 0 0.5em; }
+h2 { font-size: 1.4rem; margin: 1.8em 0 0.6em; }
+h3 { font-size: 1.15rem; margin: 1.6em 0 0.5em; }
+
+p { margin: 0 0 1.1em; }
+
+a { color: var(--accent); }
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 2em;
+}
+
+code, pre, kbd, samp {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+code {
+  background: var(--code-bg);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 16px 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.88em;
+  line-height: 1.55;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+blockquote {
+  margin: 1.5em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--border);
+  color: var(--muted);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5em 0;
+}
+
+ul, ol {
+  padding-left: 1.4em;
+}
+
+/* Table of contents */
+nav.toc {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 0 0 2.5em;
+  font-size: 0.92rem;
+}
+
+nav.toc p.toc-title {
+  margin: 0 0 0.5em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+nav.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+nav.toc ul ul {
+  padding-left: 1.1em;
+}
+
+nav.toc li {
+  margin: 0.25em 0;
+}
+
+nav.toc a {
+  text-decoration: none;
+  color: var(--fg);
+}
+
+nav.toc a:hover {
+  color: var(--accent);
+}
+
+/* Post list */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-list li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list li:first-child {
+  padding-top: 0;
+}
+
+.post-list a.title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--fg);
+}
+
+.post-list a.title:hover {
+  color: var(--accent);
+}
+
+.post-list .date {
+  color: var(--muted);
+  font-size: 0.88rem;
+  display: block;
+  margin-top: 2px;
+}
+
+.post-list .desc {
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+footer.site {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+footer.site .wrap {
+  padding: 24px 20px 40px;
+}
