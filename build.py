@@ -112,7 +112,7 @@ def build_about():
 
 
 def build_index(posts):
-    posts_sorted = sorted(posts, key=lambda p: p["date"])
+    posts_sorted = sorted(posts, key=lambda p: p["date"], reverse=True)
     items = []
     for p in posts_sorted:
         items.append(f"""
