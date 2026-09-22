@@ -4,7 +4,7 @@ date: 2026-09-22
 description: On Rich Hickey, Taleb's Fat Tony, and the difference between delivering features and solving real problems.
 ---
 
-Being laid off raises a question that keeps coming to mind — not really "what company do I want to work for," but "what kind of product do I want to work on?" It doesn't matter if that's inside a company or just my own idea. For me, there are two major points:
+Being laid off raises a question that keeps coming to mind — not really _"what company do I want to work for"_ but _"what kind of product do I want to work on?"_ It doesn't matter if that's inside a company or just my own idea. For me, there are two major points:
 
 1. Money — sure, I have some responsibilities with my wife, my daughter and family (I will not talk about this in this post)
 2. Problem Solving Mindset — the one I want to talk about here
